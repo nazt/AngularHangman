@@ -1,0 +1,5 @@
+<div ng-controller="HangmanController"  ng-init="level=[1, 2, 3]" >
+	<div  id="level" ng-repeat="c in level">
+		<div style="cursor: pointer;" width="200px;" ng:click="chooseLevel(c);">Level {{c}}</div>
+	</div>
+</div>
