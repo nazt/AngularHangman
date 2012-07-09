@@ -7,6 +7,8 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
     $scope.question = "Hello"
     $scope.level = $scope.question.length || $routeParams.level || 0;
     $scope.wrong = 0;
+    var maxWrong = 8;
+    $scope.guessed = [];
     $scope.correct = 0;
 
     // Construct
@@ -20,15 +22,21 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
     }();
 
     $scope.guess = function(char) {
-        $log.log("GUESSNG ", char, "in level", $scope.level, $scope.word, $scope.wrong);
+        var char = char.toLowerCase();
+        if (_.indexOf($scope.guessed, char) !== -1) {
+            return; 
+        }
+        $scope.guessed.push(char);
         var idxes = hangmanBrain.guess($scope.question.split(''), char);
         if (_.isEmpty(idxes)) {
-            $scope.wrong++;
-            if ($scope.wrong >= 8) {
+            if ($scope.wrong >= maxWrong) {
                 $scope.message = "You LOSE!";
+                return;
             }
+            $scope.wrong++;
         }
         else {
+
             $scope.correct++;
             _.each(idxes, function(v, k){ 
                 $scope.revealedWord[v] = $scope.question[v];

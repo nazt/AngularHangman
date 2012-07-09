@@ -55,6 +55,7 @@
 
 #letters {
   width: 300px;
+  cursor: pointer;
 }
 
 
@@ -107,4 +108,9 @@
 }
 .hangman.step10 {
   background-image: url('../img/hang10.gif');
+}
+
+#letters.clicked {
+  opacity: 0.5;
+  cursor: default;
 }
