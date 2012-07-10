@@ -24,10 +24,7 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
 
     $scope.guess = function(char) {
         var idxes;
-        if (_.indexOf($scope.guessed, char) !== -1 || $scope.gameStatus) {
-            $log.log ("RETURN");
-            return; 
-        }
+        if ($scope.gameStatus !== '') { return; }
         $scope.guessed.push(char);
         idxes = hangmanBrain.guess($scope.question.split(''), char);
         if (_.isEmpty(idxes)) {
