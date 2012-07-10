@@ -76,7 +76,7 @@
   float: left;
 }
 
-#letters .letter.clicked {
+#letters .letter.clicked, #letters.win, #letters.lose {
   opacity: 0.5;
   cursor: default;
 }
@@ -86,4 +86,8 @@
   font-size: 150%;
   letter-spacing: 0.25em;
   margin: 0.25em 0 0.4em 30px;
+}
+
+#letters.win, #letters.lose {
+  cursor: default;
 }
