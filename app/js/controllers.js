@@ -10,8 +10,7 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
     $scope.wrong = 0;
     $scope.guessed = [];
     $scope.correct = 0;
-    $scope.win = false;
-    $scope.lose = false;
+    $scope.gameStatus = '';
 
     // Construct
     !function() {
@@ -25,7 +24,7 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
 
     $scope.guess = function(char) {
         var idxes;
-        if (_.indexOf($scope.guessed, char) !== -1 || $scope.win || $scope.lose) {
+        if (_.indexOf($scope.guessed, char) !== -1 || $scope.gameStatus) {
             $log.log ("RETURN");
             return; 
         }
@@ -35,7 +34,7 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
             $scope.wrong++;
             if ($scope.wrong >= maxWrong) {
                 $scope.message = "You LOSE!";
-                $scope.lose = true;
+                $scope.gameStatus = "lose";
                 return;
             }
         }
@@ -47,7 +46,7 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
             var pp = hangmanBrain.preparedAnswerObj($scope.question.split(''));
             if (_.size(pp) == $scope.correct) {
                 $scope.message = "You WIN!";
-                $scope.win = true;
+                $scope.gameStatus = "win";
             }
             $scope.word = $scope.revealedWord.join('');
         }
