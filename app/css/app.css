@@ -29,17 +29,7 @@
   padding: 0;
 }
 
-#letters div {
-  width: 40px;
-  margin: 0 5px 5px 0;
-  padding: 0.25em 0;
-  text-align: center;
-  font-weight: bold;
-  font-size: 150%;
-  color: #fff;
-  background-color: #006;
-  float: left;
-}
+
 
 #level div{
   width: 200px;
@@ -52,14 +42,7 @@
   background-color: #006;
 }
 
-
-#letters {
-  width: 300px;
-  cursor: pointer;
-}
-
-
-#word {
+.word {
   font-weight: bold;
   font-size: 150%;
   letter-spacing: 0.25em;
@@ -68,49 +51,39 @@
 
 
 .hangman {
-  clear: both;
+  float: left;
   width: 100px;
   height: 100px;
 
 }
-.hangman.step0 {
-  background-image: url('../img/hang0.gif');
-}
-.hangman.step1 {
-  background-image: url('../img/hang1.gif');
-}
-.hangman.step2 {
-  background-image: url('../img/hang2.gif');
-}
-.hangman.step3 {
-  background-image: url('../img/hang3.gif');
-}
-.hangman.step4 {
-  background-image: url('../img/hang4.gif');
-}
-.hangman.step4 {
-  background-image: url('../img/hang4.gif');
-}
-.hangman.step5 {
-  background-image: url('../img/hang5.gif');
-}
-.hangman.step6 {
-  background-image: url('../img/hang6.gif');
-}
-.hangman.step7 {
-  background-image: url('../img/hang7.gif');
-}
-.hangman.step8 {
-  background-image: url('../img/hang8.gif');
-}
-.hangman.step9 {
-  background-image: url('../img/hang9.gif');
-}
-.hangman.step10 {
-  background-image: url('../img/hang10.gif');
+
+
+#letters {
+  width: 300px;
+  cursor: pointer;
+  float: left;
 }
 
-#letters.clicked {
+#letters .letter span{
+  width: 40px;
+  margin: 0 5px 5px 0;
+  padding: 0.25em 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 150%;
+  color: #fff;
+  background-color: #006;
+  float: left;
+}
+
+#letters .letter.clicked {
   opacity: 0.5;
   cursor: default;
+}
+
+.message {
+  font-weight: bold;
+  font-size: 150%;
+  letter-spacing: 0.25em;
+  margin: 0.25em 0 0.4em 30px;
 }
