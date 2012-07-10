@@ -3,40 +3,43 @@
 /* Controllers */
 
 function HangmanController($scope, $log, $routeParams, hangmanBrain) {
+    var maxWrong = 10;
     $scope.abc = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
-    $scope.question = "Hello"
+    $scope.question = "Hello".toUpperCase();
     $scope.level = $scope.question.length || $routeParams.level || 0;
     $scope.wrong = 0;
-    var maxWrong = 8;
     $scope.guessed = [];
     $scope.correct = 0;
+    $scope.win = false;
+    $scope.lose = false;
 
     // Construct
     !function() {
         $scope.word = new Array($scope.level+1).join('_');
-        $scope.revealedWord = $scope.word.split('')
-        $log.log("revealedWord", $scope.revealedWord);
+        $scope.revealedWord = $scope.word.split('');
         if ($scope.level < 1 ) {
             window.location = '#/level';
         }
     }();
 
+
     $scope.guess = function(char) {
-        var char = char.toLowerCase();
-        if (_.indexOf($scope.guessed, char) !== -1) {
+        var idxes;
+        if (_.indexOf($scope.guessed, char) !== -1 || $scope.win || $scope.lose) {
+            $log.log ("RETURN");
             return; 
         }
         $scope.guessed.push(char);
-        var idxes = hangmanBrain.guess($scope.question.split(''), char);
+        idxes = hangmanBrain.guess($scope.question.split(''), char);
         if (_.isEmpty(idxes)) {
+            $scope.wrong++;
             if ($scope.wrong >= maxWrong) {
                 $scope.message = "You LOSE!";
+                $scope.lose = true;
                 return;
             }
-            $scope.wrong++;
         }
         else {
-
             $scope.correct++;
             _.each(idxes, function(v, k){ 
                 $scope.revealedWord[v] = $scope.question[v];
@@ -44,6 +47,7 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
             var pp = hangmanBrain.preparedAnswerObj($scope.question.split(''));
             if (_.size(pp) == $scope.correct) {
                 $scope.message = "You WIN!";
+                $scope.win = true;
             }
             $scope.word = $scope.revealedWord.join('');
         }
