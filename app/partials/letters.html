@@ -1,3 +1,5 @@
-<div  id="letters" ng-repeat="c in abc" ng-class="clickVar">
-    <div ng:click="guess(c); clickVar='clicked'">{{c}}</div>
+<div id="letters">
+	<div  class="letter" ng-repeat="c in abc" ng-class="clickVar">
+	    <span ng:click="guess(c); clickVar='clicked'">{{c | uppercase}}</span>
+	</div>
 </div>
