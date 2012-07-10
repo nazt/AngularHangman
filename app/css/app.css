@@ -91,3 +91,7 @@
 #letters.win, #letters.lose {
   cursor: default;
 }
+
+.lose {
+  color: red; 
+}

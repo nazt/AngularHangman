@@ -2,10 +2,11 @@
 
 /* Controllers */
 
-function HangmanController($scope, $log, $routeParams, hangmanBrain) {
+function GameController($scope, $log, $routeParams, hangmanBrain) {
     var maxWrong = 10;
+    var dictionaries = {1: ['ant', 'rat', 'bat', 'hat', 'sat'], 2: ['worship', 'warlord', 'daddy'], 3: ['opendream', 'agility', 'preparing'] }
     $scope.abc = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
-    $scope.question = "Hello".toUpperCase();
+    $scope.question = _.shuffle(dictionaries[$routeParams.level])[0]
     $scope.level = $scope.question.length || $routeParams.level || 0;
     $scope.wrong = 0;
     $scope.guessed = [];
@@ -32,6 +33,7 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
             if ($scope.wrong >= maxWrong) {
                 $scope.message = "You LOSE!";
                 $scope.gameStatus = "lose";
+                $scope.word = $scope.question;
                 return;
             }
         }
@@ -49,9 +51,12 @@ function HangmanController($scope, $log, $routeParams, hangmanBrain) {
         }
     }
 
+
+}
+
+function LevelController($scope) {
     $scope.chooseLevel = function(level) {
         $scope.level = level;
         window.location = '#/game/'+level;
     }
-
 }
