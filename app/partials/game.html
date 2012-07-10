@@ -1,11 +1,11 @@
 <ng:include src="'partials/letters.html'"></ng:include>
 
-<div class="hangman">
+<div class="hangman {{gameStatus}}">
 	<img src="img/hang{{wrong}}.gif"/>
 </div>
 
-<p class="word">{{word}}</p>
+<p class="word {{gameStatus}}" >{{word}}</p>
 
 <div class="wrong">wrong: {{wrong}} </div>
 <div class="correct">correct: {{correct}} </div>
-<div class="message">{{message}}</div>
+<div class="message {{gameStatus}}">{{message}}</div>
