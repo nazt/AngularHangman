@@ -54,9 +54,17 @@ function GameController($scope, $log, $routeParams, hangmanBrain) {
 
 }
 
-function LevelController($scope) {
+function LevelController($scope, $window) {
+    $scope.allowLevel = [1, 2, 3];
     $scope.chooseLevel = function(level) {
-        $scope.level = level;
-        window.location = '#/game/'+level;
+        var gameLevel;
+        if (_.contains($scope.allowLevel, level)) {
+            gameLevel = '#/game/' + level;  
+        }
+        else {
+            gameLevel = '#/level';  
+        }
+        
+        $window.location = gameLevel;
     }
 }
